@@ -1,0 +1,14 @@
+# Visual Studio user files
+.vs/
+*.user
+*.suo
+
+# Build output
+**/bin/
+**/obj/
+
+# IDE and OS files
+*.rsuser
+*.sln.docstates
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,329 @@
+<Window x:Class="HotelsManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="StayEase — бронирование отелей"
+        Width="1440" Height="900" MinWidth="1120" MinHeight="720"
+        WindowStartupLocation="CenterScreen"
+        Background="#F4F7FB">
+    <Window.Resources>
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="CornerRadius" Value="16" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="BorderBrush" Value="#E5ECF6" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="#075CFF" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="PrimaryButtonBorder" Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="PrimaryButtonBorder" Property="Background" Value="#0647C9" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="#10A9E8" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="SecondaryButtonBorder" Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="SecondaryButtonBorder" Property="Background" Value="#0284C7" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DangerButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Padding" Value="12,7" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="DangerButtonBorder" Background="#EF4444" CornerRadius="10" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="DangerButtonBorder" Property="Background" Value="#DC2626" /></Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="HeadersVisibility" Value="Column" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="CanUserAddRows" Value="False" />
+            <Setter Property="CanUserResizeRows" Value="False" />
+            <Setter Property="GridLinesVisibility" Value="None" />
+            <Setter Property="RowHeight" Value="45" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="RowBackground" Value="White" />
+            <Setter Property="AlternatingRowBackground" Value="#F9FBFF" />
+            <Setter Property="AlternationCount" Value="2" />
+            <Setter Property="FontFamily" Value="{StaticResource AppFont}" />
+            <Setter Property="Foreground" Value="#334155" />
+            <Setter Property="ColumnHeaderStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Foreground" Value="#64748B" />
+                        <Setter Property="FontWeight" Value="SemiBold" />
+                        <Setter Property="Padding" Value="12,8" />
+                        <Setter Property="Background" Value="#F8FAFC" />
+                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                        <Setter Property="BorderBrush" Value="#E5ECF6" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="205" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="#102A43">
+            <Grid Margin="20,30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel>
+                    <Border Width="44" Height="44" CornerRadius="12" Background="#3B82F6" HorizontalAlignment="Left">
+                        <TextBlock Text="S" Foreground="White" FontWeight="Bold" FontSize="23" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <TextBlock Text="StayEase" Foreground="White" FontSize="23" FontWeight="SemiBold" Margin="0,14,0,3" />
+                    <TextBlock Text="Система бронирования" Foreground="#9DB4D4" FontSize="12" />
+                </StackPanel>
+                <Border Grid.Row="1" Background="#183957" CornerRadius="14" Padding="14" VerticalAlignment="Center">
+                    <StackPanel>
+                        <TextBlock Text="Быстрое управление" Foreground="White" FontWeight="SemiBold" />
+                        <TextBlock Text="Номера, бронирования и уведомления собраны на одном экране." Foreground="#B7C9E5" TextWrapping="Wrap" FontSize="12" Margin="0,7,0,0" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Background="#183957" CornerRadius="12" Padding="13">
+                    <StackPanel>
+                        <TextBlock Text="Администратор" Foreground="White" FontWeight="SemiBold" />
+                        <TextBlock Text="Управление отелем" Foreground="#9DB4D4" FontSize="12" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1" Margin="30,26,30,24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <StackPanel>
+                    <TextBlock x:Name="PageTitle" Text="Панель управления" FontSize="26" FontWeight="SemiBold" Foreground="#172554" />
+                    <TextBlock x:Name="PageSubtitle" Text="Создавайте бронирования и контролируйте доступность номеров" Foreground="#64748B" Margin="0,5,0,0" />
+                </StackPanel>
+                <Border HorizontalAlignment="Right" Background="White" CornerRadius="10" Padding="13,8" BorderBrush="#E5ECF6" BorderThickness="1">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="8" Height="8" Fill="#22C55E" VerticalAlignment="Center" Margin="0,0,8,0" />
+                        <TextBlock Text="Система активна" Foreground="#334155" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="0,24,0,22">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Style="{StaticResource Card}" Margin="0,0,12,0">
+                    <StackPanel>
+                        <TextBlock Text="ВСЕГО НОМЕРОВ" Foreground="#64748B" FontSize="11" FontWeight="SemiBold" />
+                        <TextBlock Text="{Binding TotalRooms}" FontSize="27" FontWeight="SemiBold" Foreground="#172554" Margin="0,5,0,0" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource Card}" Margin="6,0">
+                    <StackPanel>
+                        <TextBlock Text="СВОБОДНО" Foreground="#64748B" FontSize="11" FontWeight="SemiBold" />
+                        <TextBlock Text="{Binding AvailableRooms}" FontSize="27" FontWeight="SemiBold" Foreground="#16A34A" Margin="0,5,0,0" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource Card}" Margin="12,0,0,0">
+                    <StackPanel>
+                        <TextBlock Text="АКТИВНЫХ БРОНЕЙ" Foreground="#64748B" FontSize="11" FontWeight="SemiBold" />
+                        <TextBlock Text="{Binding ActiveBookings}" FontSize="27" FontWeight="SemiBold" Foreground="#2563EB" Margin="0,5,0,0" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="390" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Margin="0,0,22,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="220" />
+                    </Grid.RowDefinitions>
+                    <Border Style="{StaticResource Card}" Padding="18" Margin="0,0,0,16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="110" />
+                                <ColumnDefinition Width="130" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,12,0">
+                                <TextBlock Text="Тип номера" Foreground="#64748B" FontSize="12" Margin="0,0,0,4" />
+                                <ComboBox ItemsSource="{Binding RoomFilterOptions}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedRoomFilter}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="0,0,12,0">
+                                <TextBlock Text="Гостей от" Foreground="#64748B" FontSize="12" Margin="0,0,0,4" />
+                                <TextBox Text="{Binding MinimumCapacity, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="0,0,12,0">
+                                <TextBlock Text="Цена до, руб." Foreground="#64748B" FontSize="12" Margin="0,0,0,4" />
+                                <TextBox Text="{Binding MaximumPrice, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                            <Button Grid.Column="3" Content="Найти" Style="{StaticResource PrimaryButton}" VerticalAlignment="Bottom" Click="Search_Click" />
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="1" Style="{StaticResource Card}" Padding="0" Margin="0,0,0,16">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <DockPanel Margin="20,18,20,14">
+                                <TextBlock Text="Доступные номера" FontSize="17" FontWeight="SemiBold" Foreground="#172554" DockPanel.Dock="Left" />
+                                <Button Content="Удалить выбранный" Style="{StaticResource DangerButton}" DockPanel.Dock="Right" Click="DeleteSelectedRoom_Click" />
+                                <TextBlock Text="Выберите номер для бронирования" Foreground="#64748B" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,12,0" />
+                            </DockPanel>
+                            <DataGrid x:Name="RoomDataGrid" Grid.Row="1" ItemsSource="{Binding RoomsView}" SelectedItem="{Binding SelectedRoom, Mode=TwoWay}" SelectionChanged="Room_SelectionChanged">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="НОМЕР" Binding="{Binding RoomNumber}" Width="*" />
+                                    <DataGridTextColumn Header="ТИП" Binding="{Binding TypeName}" Width="*" />
+                                    <DataGridTextColumn Header="ГОСТЕЙ" Binding="{Binding Capacity}" Width="80" />
+                                    <DataGridTextColumn Header="ЦЕНА / НОЧЬ" Binding="{Binding PriceText}" Width="130" />
+                                    <DataGridTextColumn Header="СТАТУС" Binding="{Binding Status}" Width="105" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="2" Style="{StaticResource Card}" Padding="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <DockPanel Margin="20,16,20,12">
+                                <TextBlock Text="Последние бронирования" FontSize="17" FontWeight="SemiBold" Foreground="#172554" />
+                                <Button Content="Отменить выбранное" Style="{StaticResource SecondaryButton}" Padding="12,7" HorizontalAlignment="Right" Click="CancelBooking_Click" />
+                            </DockPanel>
+                            <DataGrid x:Name="BookingsDataGrid" Grid.Row="1" ItemsSource="{Binding Bookings}" SelectedItem="{Binding SelectedBooking, Mode=TwoWay}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="№" Binding="{Binding BookingId}" Width="50" />
+                                    <DataGridTextColumn Header="ГОСТЬ" Binding="{Binding GuestName}" Width="*" />
+                                    <DataGridTextColumn Header="НОМЕР" Binding="{Binding RoomNumber}" Width="75" />
+                                    <DataGridTextColumn Header="ПЕРИОД" Binding="{Binding Period}" Width="165" />
+                                    <DataGridTextColumn Header="СУММА" Binding="{Binding TotalPriceText}" Width="120" />
+                                    <DataGridTextColumn Header="СТАТУС" Binding="{Binding Status}" Width="110" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <ScrollViewer x:Name="SidePanelScrollViewer" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Новое бронирование" FontSize="18" FontWeight="SemiBold" Foreground="#172554" />
+                                <TextBlock Text="{Binding SelectedRoomTitle}" FontWeight="SemiBold" Foreground="#075CFF" FontSize="12" Margin="0,6,0,0" />
+                                <TextBlock Text="Выбранный номер автоматически появится в форме. Там укажите гостя, даты и тариф." TextWrapping="Wrap" Foreground="#64748B" FontSize="12" Margin="0,5,0,17" />
+                                <Border Background="#EDF5FF" CornerRadius="11" Padding="13" Margin="0,0,0,14">
+                                    <StackPanel>
+                                        <TextBlock Text="✓  Расчёт стоимости до подтверждения" Foreground="#2563EB" FontSize="12" />
+                                        <TextBlock Text="✓  Email и SMS-уведомления гостю" Foreground="#2563EB" FontSize="12" Margin="0,6,0,0" />
+                                    </StackPanel>
+                                </Border>
+                                <Button Content="Забронировать выбранный номер" Style="{StaticResource PrimaryButton}" Click="OpenBookingWindow_Click" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Добавить номер" FontSize="17" FontWeight="SemiBold" Foreground="#172554" />
+                                <Grid Margin="0,14,0,0">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="105" /><ColumnDefinition Width="12" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding NewRoomNumber, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ComboBox Grid.Column="2" ItemsSource="{Binding RoomTypes}" SelectedItem="{Binding NewRoomType}" />
+                                </Grid>
+                                <Button Content="Добавить в отель" Style="{StaticResource SecondaryButton}" Margin="0,11,0,0" Click="AddRoom_Click" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border x:Name="NotificationsPanel" Style="{StaticResource Card}">
+                            <StackPanel>
+                                <DockPanel Margin="0,0,0,10">
+                                    <TextBlock Text="Уведомления" FontSize="17" FontWeight="SemiBold" Foreground="#172554" />
+                                    <TextBlock Text="Observer" Foreground="#2563EB" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                </DockPanel>
+                                <ListBox ItemsSource="{Binding Notifications}" BorderThickness="0" Background="Transparent" MaxHeight="145">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Margin="0,4">
+                                                <TextBlock Text="{Binding Header}" FontWeight="SemiBold" Foreground="#334155" FontSize="12" />
+                                                <TextBlock Text="{Binding Message}" TextWrapping="Wrap" Foreground="#64748B" FontSize="11" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                        </Border>
+                        <Border x:Name="SettingsPanel" Style="{StaticResource Card}" Margin="0,16,0,0">
+                            <StackPanel>
+                                <TextBlock Text="Настройки поиска" FontSize="17" FontWeight="SemiBold" Foreground="#172554" />
+                                <TextBlock Text="Сбросьте фильтры, чтобы снова показать все свободные номера." TextWrapping="Wrap" Foreground="#64748B" FontSize="12" Margin="0,6,0,12" />
+                                <Button Content="Сбросить фильтры" Style="{StaticResource SecondaryButton}" Click="ResetFilters_Click" />
+                                <Separator Margin="0,15,0,12" Background="#E5ECF6" />
+                                <TextBlock Text="Каналы уведомлений" FontWeight="SemiBold" Foreground="#334155" FontSize="13" />
+                                <TextBlock Text="Email и SMS подключаются к каждому новому бронированию." TextWrapping="Wrap" Foreground="#64748B" FontSize="12" Margin="0,5,0,0" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
